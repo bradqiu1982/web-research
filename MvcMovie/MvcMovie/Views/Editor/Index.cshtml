@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "A Simple Page with CKEditor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>A Simple Page with CKEditor</h2>
+
+<script src="../../ckeditor/ckeditor.js"></script>
+
+<div ID="DIV1">
+   @Html.Raw(string.IsNullOrEmpty(ViewBag.newhtml)? ":&nbsp;" : ViewBag.newhtml)
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+  <div class="form-group">
+      <div>
+          <textarea name="editor1" id="editor1" rows="10" cols="80">
+              This is my textarea to be replaced with CKEditor.
+          </textarea>
+          <script>
+              // Replace the <textarea id="editor1"> with a CKEditor
+              // instance, using default configuration.
+              CKEDITOR.replace('editor1', { htmlEncodeOutput: true, filebrowserImageUploadUrl: '/userfiles/Upload.ashx' });
+          </script>
+          </div>
+      </div>
+
+    <div class="form-group">
+        <div>
+            <input type="submit" value="Submit" class="btn btn-default" />
+        </div>
+    </div>
+
+}
